@@ -41,8 +41,6 @@ public class AddValuesToTheFile {
 			map.put(sector, list);
 		}	else {
 			list = map.get(sector);
-			//System.out.println(list.get(0).Name);
-			//Line 46 is checking if both of them are same or not if it is same we have to edit else write it
 			
 			for(int i=0; i< list.size() ;i++) {
 				StockDeets ss = list.get(i);
@@ -67,8 +65,7 @@ public class AddValuesToTheFile {
 			for (Entry<String, List<StockDeets>> entry : map.entrySet()) {					
 				for(StockDeets val : entry.getValue()) {
 				  count++;
-				  //TODO CHANGE HARD CODED
-				  if(val.Name.equals(name) /*|| /val.Name.equals("HDFC BANK")*/) {
+				  if(val.Name.equals(name) ) {
 						writer.append(eol);  
 					 }
 					writer.append(val.Name)
