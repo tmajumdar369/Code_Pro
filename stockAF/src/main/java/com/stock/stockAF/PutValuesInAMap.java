@@ -18,10 +18,15 @@ public class PutValuesInAMap {
 		String sector = null;
 		double price = 0;
 		double percentage;
+		int c=0;
 		while(sc.hasNextLine()) {
+			c++;
 			List<StockDeets> list = new LinkedList<>();
-			String n = sc.next();
-			name = n.replaceAll("\n", "");
+			name = sc.next();
+			if(c == 1) {
+				name = "\r" + name;
+			}
+			//name = n.replaceAll("\n", "");
 			sector = sc.next();
 			price = Double.parseDouble(sc.next());
 			percentage = Double.parseDouble(sc.next());

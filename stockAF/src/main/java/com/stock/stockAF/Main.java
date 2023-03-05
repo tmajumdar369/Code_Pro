@@ -18,7 +18,7 @@ public class Main {
 	public static int countStocks = 0;
 	public static void main(String[] args) throws IOException, Exception {
 		//Bring the driver code. The first step is just uploading the file here
-		File file = new File("D:\\JavaProjects\\stockAF\\src\\main\\resources\\static\\Stock_AF.csv");
+		File file = new File("C:\\Users\\tmaju\\git\\Code_Pro\\stockAF\\src\\main\\resources\\static\\Stock_AF.csv");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter(",");
 		

@@ -30,27 +30,42 @@ public class AddValuesToTheFile {
 		
 		
 		String name = sc.nextLine();
+		//name = "\r" +name;
 		String sector = sc.nextLine();
 		double price = Double.valueOf(sc.nextLine());
 		List<StockDeets> list = new LinkedList<>();
 		StockDeets st = new StockDeets(name, sector, price);
+		boolean flag = false;
 		list.add(st);
 		if(!map.containsKey(st.Sector)) {
 			map.put(sector, list);
 		}	else {
 			list = map.get(sector);
-			list.add(st);
+			
+			for(int i=0; i< list.size() ;i++) {
+				StockDeets ss = list.get(i);
+				System.out.println(ss.Name + " " + name);
+				flag = ss.Name.equals("\r" + name);
+				if(flag) {
+					ss.Price = (ss.Price + price);
+					ss.investedPercentage = ss.Price * 100 / ss.total;
+					list.set(i, ss);
+					break;
+				}
+			}
+			if(flag == false) {
+				list.add(st);
+			}
 			map.put(sector, list);
 		}
-		int count = 0;
+		int count = flag==true?1:0;
 		String eol = System.getProperty("line.separator");
 		com.stock.stockAF.Main.countStocks++;
 		try (Writer writer = new FileWriter(file)) {
 			for (Entry<String, List<StockDeets>> entry : map.entrySet()) {					
 				for(StockDeets val : entry.getValue()) {
 				  count++;
-				  //TODO CAHNGE HARD CODED
-				  if(val.Name.equals(name) || val.Name.equals("HDFC BANK")) {
+				  if(val.Name.equals(name) ) {
 						writer.append(eol);  
 					 }
 					writer.append(val.Name)
@@ -64,14 +79,11 @@ public class AddValuesToTheFile {
 					if(com.stock.stockAF.Main.countStocks != count) {
 					  writer.append(',');
 					}
-					
-					
 				}
 			}
 		} catch (IOException ex) {
 			  ex.printStackTrace(System.err);
 		}
-		System.out.println("*******************************************************************************************");
-		printMapValues.printMap(map);
+		
 	}	
 }
